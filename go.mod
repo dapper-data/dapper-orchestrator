@@ -8,6 +8,7 @@ require (
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.10.9
 	github.com/pelletier/go-toml/v2 v2.1.0
+	golang.org/x/sync v0.4.0
 )
 
 require (

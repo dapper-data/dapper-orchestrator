@@ -6,7 +6,10 @@ import (
 	"sync"
 
 	"github.com/heimdalr/dag"
+	"golang.org/x/sync/semaphore"
 )
+
+var ConcurrentProcessors int64 = 8
 
 // ProcessInterfaceConversionError returns when trying to load a process from our
 // internal process store returns completely unexpected data
@@ -56,6 +59,7 @@ type DAG struct {
 	*dag.DAG
 	inputs    *sync.Map
 	processes *sync.Map
+	wg        *semaphore.Weighted
 
 	ErrorChan chan error
 }
@@ -66,6 +70,7 @@ func New() *DAG {
 		DAG:       dag.NewDAG(),
 		inputs:    new(sync.Map),
 		processes: new(sync.Map),
+		wg:        semaphore.NewWeighted(ConcurrentProcessors),
 		ErrorChan: make(chan error),
 	}
 }
@@ -125,6 +130,9 @@ func (d DAG) runInput(id string, c chan Event) {
 }
 
 func (d DAG) runChild(inputID string, child string, event Event) error {
+	d.wg.Acquire(context.Background(), 1)
+	defer d.wg.Release(1)
+
 	process, ok := d.processes.Load(child)
 	if !ok {
 		return UnknownProcessError{
