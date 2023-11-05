@@ -21,9 +21,11 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Go
       uses: actions/setup-go@v3
@@ -39,5 +41,5 @@ jobs:
     - name: Test
       run: go test -v -covermode=count -coverprofile=coverage.out --tags database,docker
       env:
-        TEST_DB_CONN_STRING: "user=postgres password=postgres dbname=tests sslmode=disable port=5432 host=postgres"
-        TEST_DB_URL: "postgres://postgres:postgres@postgres:5432/tests?sslmode=disable"
+        TEST_DB_CONN_STRING: "user=postgres password=postgres dbname=tests sslmode=disable port=5432 host=localhost"
+        TEST_DB_URL: "postgres://postgres:postgres@localhost:5432/tests?sslmode=disable"
