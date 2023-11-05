@@ -3,7 +3,7 @@
 [![GoDoc](https://img.shields.io/badge/pkg.go.dev-doc-blue)](http://pkg.go.dev/github.com/jspc/pipelines-orchestrator)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jspc/pipelines-orchestrator)](https://goreportcard.com/report/github.com/jspc/pipelines-orchestrator)
 
-package orchestrator will, given
+Package orchestrator will, given
 
 1. An input source (such as a database)
 2. A way of understanding when a change is made to an input (such as a notify/listen pipe in postgres)
@@ -77,33 +77,33 @@ ID returns a unique ID for a process manager
 
 Run takes an Event, and passes it to a container to run
 
-### type [DAG](/dag.go#L54)
+### type [DAG](/dag.go#L55)
 
 `type DAG struct { ... }`
 
-DAG, or 'Directed Acyclic Graph' runs inputs and processes
+DAG (or 'Directed Acyclic Graph') runs inputs and processes
 
-#### func [New](/dag.go#L63)
+#### func [New](/dag.go#L64)
 
 `func New() *DAG`
 
 New returns a DAG ready for use
 
-#### func (*DAG) [AddInput](/dag.go#L74)
+#### func (*DAG) [AddInput](/dag.go#L75)
 
 `func (d *DAG) AddInput(ctx context.Context, i Input) (err error)`
 
 AddInput takes an Input, adds it to the DAG, and runs it
 ready for events to flow through
 
-#### func (DAG) [AddLink](/dag.go#L104)
+#### func (DAG) [AddLink](/dag.go#L105)
 
 `func (d DAG) AddLink(input Input, process Process) (err error)`
 
 AddLink accepts an Input and a Process, and links them so that when the
 input takes a
 
-#### func (DAG) [AddProcess](/dag.go#L95)
+#### func (DAG) [AddProcess](/dag.go#L96)
 
 `func (d DAG) AddProcess(p Process) error`
 
@@ -147,7 +147,7 @@ input supports
 
 ID returns a (hopefully) unique value for this InputConfig
 
-### type [Operation](/operation.go#L20)
+### type [Operation](/operation.go#L21)
 
 `type Operation uint8`
 
@@ -156,6 +156,8 @@ on a piece of data and can be used in Inputs to do clever
 things around ignoring certain events
 
 #### Constants
+
+Supported set of operations
 
 ```golang
 const (
@@ -167,35 +169,35 @@ const (
 )
 ```
 
-#### func (Operation) [MarshalJSON](/operation.go#L64)
+#### func (Operation) [MarshalJSON](/operation.go#L65)
 
 `func (o Operation) MarshalJSON() ([]byte, error)`
 
 MarshalJSON implements the json.Marshaler interface which allows an
 Operation to be represented in json (which is really a json string)
 
-#### func (Operation) [MarshalText](/operation.go#L58)
+#### func (Operation) [MarshalText](/operation.go#L59)
 
 `func (o Operation) MarshalText() (b []byte, err error)`
 
 MarshalText implements the encoding.TextMarshaler interface in order
 to get a textual representation of an Operation
 
-#### func (Operation) [String](/operation.go#L70)
+#### func (Operation) [String](/operation.go#L71)
 
 `func (o Operation) String() string`
 
 String returns the string representation of an Operation, or
 "unknown" for any Operation value it doesn't know about
 
-#### func (*Operation) [UnmarshalJSON](/operation.go#L45)
+#### func (*Operation) [UnmarshalJSON](/operation.go#L46)
 
 `func (o *Operation) UnmarshalJSON(b []byte) (err error)`
 
 UnmarshalJSON implements the json.Unmarshaler interface, allowing
 for the operation type to be represented in json properly
 
-#### func (*Operation) [UnmarshalText](/operation.go#L25)
+#### func (*Operation) [UnmarshalText](/operation.go#L26)
 
 `func (o *Operation) UnmarshalText(b []byte) error`
 
@@ -242,7 +244,7 @@ ID returns the ID for this Input
 Process will configure a database for notification, and then listen to those
 notifications
 
-### type [Process](/process.go#L28)
+### type [Process](/process.go#L29)
 
 `type Process interface { ... }`
 
@@ -270,6 +272,8 @@ ID returns a (hopefully) unique value for this ProcessConfig
 ProcessExitStatus represents the final status of a Process
 
 #### Constants
+
+Provided set of ExitStatuses
 
 ```golang
 const (
@@ -302,7 +306,7 @@ NewTestProcessInterfaceConversionError can be used to return a testable error (i
 
 Error returns a descriptive error message
 
-### type [ProcessStatus](/process.go#L19)
+### type [ProcessStatus](/process.go#L20)
 
 `type ProcessStatus struct { ... }`
 
@@ -316,9 +320,11 @@ such as logs and statuscodes and so on
 UnknownProcessError returns when an input tries to trigger a process whch doesn't
 exist
 
-#### func [NewTestUnknownProcessError](/dag.go#L46)
+#### func [NewTestUnknownProcessError](/dag.go#L47)
 
 `func NewTestUnknownProcessError(input, process string) UnknownProcessError`
+
+NewTestUnknownProcessError can be used to return a testable error (in tests)
 
 #### func (UnknownProcessError) [Error](/dag.go#L42)
 

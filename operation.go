@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// Supported set of operations
 const (
 	OperationUnknown Operation = iota
 	OperationCreate

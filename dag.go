@@ -43,6 +43,7 @@ func (e UnknownProcessError) Error() string {
 	return fmt.Sprintf("unable to run %q -> %q part of process, process %[2]q is unknown", e.input, e.process)
 }
 
+// NewTestUnknownProcessError can be used to return a testable error (in tests)
 func NewTestUnknownProcessError(input, process string) UnknownProcessError {
 	return UnknownProcessError{
 		input:   input,
@@ -50,7 +51,7 @@ func NewTestUnknownProcessError(input, process string) UnknownProcessError {
 	}
 }
 
-// DAG, or 'Directed Acyclic Graph' runs inputs and processes
+// DAG (or 'Directed Acyclic Graph') runs inputs and processes
 type DAG struct {
 	*dag.DAG
 	inputs    *sync.Map

@@ -7,6 +7,7 @@ import (
 // ProcessExitStatus represents the final status of a Process
 type ProcessExitStatus uint8
 
+// Provided set of ExitStatuses
 const (
 	ProcessUnknown ProcessExitStatus = iota
 	ProcessUnstarted

@@ -1,5 +1,5 @@
 /*
-package orchestrator will, given
+Package orchestrator will, given
 
 1. An input source (such as a database)
 2. A way of understanding when a change is made to an input (such as a notify/listen pipe in postgres)
