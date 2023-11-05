@@ -19,6 +19,7 @@ const (
 
 	imageKey = "image"
 	envKey   = "env"
+	pullKey  = "pull"
 )
 
 // ContainerImageMissingErr is returned when the ExecutionContext passed to
@@ -90,6 +91,14 @@ func (c ContainerProcess) Run(ctx context.Context, e Event) (ps ProcessStatus, e
 		Name:   name,
 		Status: ProcessUnstarted,
 		Logs:   make([]string, 0),
+	}
+
+	pull, ok := c.config.ExecutionContext[pullKey]
+	if ok && pull == "true" {
+		_, err = c.c.ImagePull(ctx, c.image, types.ImagePullOptions{})
+		if err != nil {
+			return
+		}
 	}
 
 	cont, err := c.c.ContainerCreate(

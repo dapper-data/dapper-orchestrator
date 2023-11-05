@@ -27,6 +27,7 @@ var validContainerProcessConfig = orchestrator.ProcessConfig{
 	ExecutionContext: map[string]string{
 		"env":   `HELLO="WORLD"`,
 		"image": helloWorldContainer,
+		"pull":  "true",
 	},
 }
 

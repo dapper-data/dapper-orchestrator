@@ -38,7 +38,7 @@ jobs:
     - name: Build
       run: go build
 
-    - run: docker run hello-world
+    - run: docker pull hello-world
 
     - name: Test
       run: go test -v -covermode=count -coverprofile=coverage.out --tags database,docker
