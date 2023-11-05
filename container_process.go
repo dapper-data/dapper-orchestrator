@@ -153,6 +153,8 @@ func (c ContainerProcess) Run(ctx context.Context, e Event) (ps ProcessStatus, e
 		case statusOK:
 			ps.Status = ProcessSuccess
 
+			err = c.c.ContainerRemove(ctx, cont.ID, types.ContainerRemoveOptions{true, true, true})
+
 		default:
 			ps.Status = ProcessFail
 

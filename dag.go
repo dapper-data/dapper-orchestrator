@@ -9,6 +9,8 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
+// ConcurrentProcessors limits the number of processes which can be kicked off
+// at once
 var ConcurrentProcessors int64 = 8
 
 // ProcessInterfaceConversionError returns when trying to load a process from our
