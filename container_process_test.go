@@ -6,17 +6,27 @@ package orchestrator_test
 import (
 	"context"
 	"errors"
+	"os"
 	"testing"
 
 	"github.com/jspc/pipelines-orchestrator"
 )
+
+var helloWorldContainer = func() string {
+	v, ok := os.LookupEnv("HELLO_CONTAINER")
+	if ok {
+		return v
+	}
+
+	return "quay.io/podman/hello:latest"
+}()
 
 var validContainerProcessConfig = orchestrator.ProcessConfig{
 	Name: "tests",
 	Type: "container",
 	ExecutionContext: map[string]string{
 		"env":   `HELLO="WORLD"`,
-		"image": "quay.io/podman/hello:latest",
+		"image": helloWorldContainer,
 	},
 }
 

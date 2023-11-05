@@ -38,8 +38,11 @@ jobs:
     - name: Build
       run: go build
 
+    - run: docker run hello-world
+
     - name: Test
       run: go test -v -covermode=count -coverprofile=coverage.out --tags database,docker
       env:
         TEST_DB_CONN_STRING: "user=postgres password=postgres dbname=tests sslmode=disable port=5432 host=localhost"
         TEST_DB_URL: "postgres://postgres:postgres@localhost:5432/tests?sslmode=disable"
+        HELLO_CONTAINER: "hello-world"
