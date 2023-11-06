@@ -56,9 +56,9 @@ func TestNew(t *testing.T) {
 	orchestrator.New()
 }
 
-// TestDAG is a really bad test- it has sleeps and all kinds of nonsense
+// TestOrchestrator is a really bad test- it has sleeps and all kinds of nonsense
 // in it. It may be flakey, too.
-func TestDAG(t *testing.T) {
+func TestOrchestrator(t *testing.T) {
 	d := orchestrator.New()
 
 	di := dummyInput{}
