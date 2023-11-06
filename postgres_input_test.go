@@ -77,7 +77,7 @@ func TestPostgresInput_Process(t *testing.T) {
 
 	count := 0
 	go func() {
-		for _ = range c {
+		for range c {
 			count++
 		}
 	}()
