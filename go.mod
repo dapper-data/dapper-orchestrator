@@ -1,4 +1,4 @@
-module github.com/jspc/pipelines-orchestrator
+module github.com/dapper-data/dapper-orchestrator
 
 go 1.21
 
