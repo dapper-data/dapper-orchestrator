@@ -3,7 +3,7 @@ package orchestrator_test
 import (
 	"testing"
 
-	"github.com/jspc/pipelines-orchestrator"
+	"github.com/dapper-data/dapper-orchestrator"
 )
 
 func TestEvent_JSON(t *testing.T) {

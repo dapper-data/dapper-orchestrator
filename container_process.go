@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
+	"io"
 	"strings"
 	"time"
 
@@ -131,7 +132,8 @@ func (c ContainerProcess) Run(ctx context.Context, e Event) (ps ProcessStatus, e
 		return
 
 	case wr := <-wrC:
-		rc, err := c.c.ContainerLogs(ctx, cont.ID, types.ContainerLogsOptions{
+		var rc io.ReadCloser
+		rc, err = c.c.ContainerLogs(ctx, cont.ID, types.ContainerLogsOptions{
 			ShowStdout: false,
 			ShowStderr: true,
 		})

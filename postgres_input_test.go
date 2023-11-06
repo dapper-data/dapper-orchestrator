@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/dapper-data/dapper-orchestrator"
 	"github.com/jmoiron/sqlx"
-	"github.com/jspc/pipelines-orchestrator"
 	_ "github.com/lib/pq"
 )
 

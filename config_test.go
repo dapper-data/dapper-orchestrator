@@ -3,7 +3,7 @@ package orchestrator_test
 import (
 	"testing"
 
-	"github.com/jspc/pipelines-orchestrator"
+	"github.com/dapper-data/dapper-orchestrator"
 )
 
 func TestInputConfig_ID(t *testing.T) {

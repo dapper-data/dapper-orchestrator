@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/jspc/pipelines-orchestrator"
+	"github.com/dapper-data/dapper-orchestrator"
 )
 
 func TestOperation_UnmarshalText(t *testing.T) {

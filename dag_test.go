@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jspc/pipelines-orchestrator"
+	"github.com/dapper-data/dapper-orchestrator"
 )
 
 type dummyInput struct{}
