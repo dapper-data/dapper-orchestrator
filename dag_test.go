@@ -11,7 +11,7 @@ import (
 
 type dummyInput struct{}
 
-func (dummyInput) Process(_ context.Context, c chan orchestrator.Event) error {
+func (dummyInput) Handle(_ context.Context, c chan orchestrator.Event) error {
 	for {
 		time.Sleep(time.Millisecond * 100)
 		c <- orchestrator.Event{

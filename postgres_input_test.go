@@ -82,7 +82,7 @@ func TestPostgresInput_Process(t *testing.T) {
 		}
 	}()
 
-	err = p.Process(context.Background(), c)
+	err = p.Handle(context.Background(), c)
 	if err == nil {
 		t.Errorf("expected error, received none")
 	}

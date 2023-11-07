@@ -11,7 +11,7 @@ import (
 	"github.com/lib/pq"
 )
 
-// PostgresInput represents a postgres input source
+// PostgresInput represents a sample postgres input source
 //
 // This source will:
 //
@@ -70,9 +70,9 @@ func (p PostgresInput) ID() string {
 	return p.config.ID()
 }
 
-// Process will configure a database for notification, and then listen to those
+// Handle will configure a database for notification, and then listen to those
 // notifications
-func (p PostgresInput) Process(ctx context.Context, c chan Event) (err error) {
+func (p PostgresInput) Handle(ctx context.Context, c chan Event) (err error) {
 	err = p.createTriggers()
 	if err != nil {
 		return

@@ -102,7 +102,7 @@ func (d *Orchestrator) AddInput(ctx context.Context, i Input) (err error) {
 
 	c := make(chan Event)
 	go func() {
-		panic(i.Process(ctx, c))
+		panic(i.Handle(ctx, c))
 	}()
 
 	go d.runInput(id, c)
