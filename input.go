@@ -15,3 +15,18 @@ type Input interface {
 	Handle(context.Context, chan Event) error
 	ID() string
 }
+
+// NewInputFunc is the suggested function that an Input should be instantiated with
+// and, as such, can be used when creating a registry of Inputs an orchestrator
+// supports when creating Inputs dynamically say from a config file, or from an API.
+//
+// For instance:
+//
+//	var inputs = map[string]orchestrator.NewInputFunc{
+//	   "postgres": orchestrator.NewPostgresInput,
+//	   "webhook": webhooks.NewWebhookInput,
+//	}
+//	func createInput(cfg orchestrator.InputConfig) (orchestrator.Input, error) {
+//	   return inputs[cfg.Type](cfg)
+//	}
+type NewInputFunc func(InputConfig) (Input, error)
