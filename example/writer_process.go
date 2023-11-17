@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/dapper-data/dapper-orchestrator"
 	"github.com/jmoiron/sqlx"
-	"github.com/jspc/pipelines-orchestrator"
 )
 
 type precipitation struct {
